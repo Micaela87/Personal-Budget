@@ -1,0 +1,18 @@
+{
+  "name": "Personal-Budget",
+  "version": "1.0.0",
+  "description": "Fastify API to manage user personal budget",
+  "main": "index.js",
+  "repository": "https://github.com/Micaela87/Personal-Budget.git",
+  "author": "Micaela87 <84184729+Micaela87@users.noreply.github.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "fastify": "^4.15.0",
+    "nodemon": "^2.0.21"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  }
+}
