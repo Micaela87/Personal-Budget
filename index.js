@@ -22,6 +22,25 @@ fastify.get('/categories', async (req, res) => {
   
 });
 
+fastify.get('/category/:id', async (req, res) => {
+
+  try {
+
+    const category = await prisma.budgetCategories.findUnique({
+      where: { id: Number(req.params.id) }
+    });
+
+    res.send({ category });
+
+  } catch(error) {
+
+    fastify.log.error(error);
+    process.exit(1);
+
+  }
+
+});
+
 fastify.post('/category', async (req, res) => {
 
   try {
@@ -35,6 +54,27 @@ fastify.post('/category', async (req, res) => {
     process.exit(1);
 
   }
+
+});
+
+fastify.put('/category/:id', async (req, res) => {
+
+  try {
+
+    const category = await prisma.budgetCategories.update({
+      where: { id: Number(req.params.id) },
+      data: req.body
+    });
+
+    res.send({ category });
+
+  } catch(error) {
+
+    fastify.log.error(error);
+    process.exit(1);
+
+  }
+
 });
 
 // Run the server!
