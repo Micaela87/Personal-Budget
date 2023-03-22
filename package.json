@@ -9,7 +9,9 @@
   "private": true,
   "dependencies": {
     "fastify": "^4.15.0",
-    "nodemon": "^2.0.21"
+    "fastify-prisma-client": "^5.0.0",
+    "nodemon": "^2.0.21",
+    "prisma": "^4.11.0"
   },
   "type": "module",
   "scripts": {

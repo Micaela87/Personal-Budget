@@ -1,4 +1,6 @@
 import Fastify from 'fastify';
+import { PrismaClient } from './prisma/generated/prisma-client-js/index.js';
+const prisma = new PrismaClient();
 
 const fastify = Fastify({
   logger: true
@@ -10,7 +12,7 @@ fastify.get('/', function (request, reply) {
 })
 
 // Run the server!
-fastify.listen({ port: process.env.PORT }, function (err, address) {
+fastify.listen({ port: 3000 }, function (err, address) {
   if (err) {
     fastify.log.error(err)
     process.exit(1)

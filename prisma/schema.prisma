@@ -1,0 +1,15 @@
+datasource db {
+  provider = "sqlite"
+  url = env("URL")
+}
+
+model BudgetCategories {
+  id Int @id @default(autoincrement())
+  name String @unique
+  budget Int
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output = "./generated/prisma-client-js"
+}
