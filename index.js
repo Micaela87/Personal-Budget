@@ -6,10 +6,10 @@ const fastify = Fastify({
   logger: true
 });
 
-// Declare a route
-fastify.get('/', function (request, reply) {
-  reply.send({ hello: 'world' })
-})
+fastify.get('/categories', async (req, res) => {
+  const categories = await prisma.budgetCategories.findMany();
+  res.send({ categories });
+});
 
 // Run the server!
 fastify.listen({ port: 3000 }, function (err, address) {
