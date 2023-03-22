@@ -7,8 +7,34 @@ const fastify = Fastify({
 });
 
 fastify.get('/categories', async (req, res) => {
-  const categories = await prisma.budgetCategories.findMany();
-  res.send({ categories });
+
+  try {
+
+    const categories = await prisma.budgetCategories.findMany();
+    res.send({ categories });
+
+  } catch(error) {
+
+    fastify.log.error(error);
+    process.exit(1);
+
+  }
+  
+});
+
+fastify.post('/category', async (req, res) => {
+
+  try {
+
+    const category = await prisma.budgetCategories.create({data: req.body});
+    res.send({ category });
+
+  } catch(error) {
+
+    fastify.log.error(error);
+    process.exit(1);
+
+  }
 });
 
 // Run the server!
