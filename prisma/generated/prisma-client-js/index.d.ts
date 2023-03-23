@@ -18,6 +18,7 @@ export type BudgetCategories = {
   id: number
   name: string
   budget: number
+  budget_left: number
 }
 
 /**
@@ -861,29 +862,34 @@ export namespace Prisma {
   export type BudgetCategoriesAvgAggregateOutputType = {
     id: number | null
     budget: number | null
+    budget_left: number | null
   }
 
   export type BudgetCategoriesSumAggregateOutputType = {
     id: number | null
     budget: number | null
+    budget_left: number | null
   }
 
   export type BudgetCategoriesMinAggregateOutputType = {
     id: number | null
     name: string | null
     budget: number | null
+    budget_left: number | null
   }
 
   export type BudgetCategoriesMaxAggregateOutputType = {
     id: number | null
     name: string | null
     budget: number | null
+    budget_left: number | null
   }
 
   export type BudgetCategoriesCountAggregateOutputType = {
     id: number
     name: number
     budget: number
+    budget_left: number
     _all: number
   }
 
@@ -891,29 +897,34 @@ export namespace Prisma {
   export type BudgetCategoriesAvgAggregateInputType = {
     id?: true
     budget?: true
+    budget_left?: true
   }
 
   export type BudgetCategoriesSumAggregateInputType = {
     id?: true
     budget?: true
+    budget_left?: true
   }
 
   export type BudgetCategoriesMinAggregateInputType = {
     id?: true
     name?: true
     budget?: true
+    budget_left?: true
   }
 
   export type BudgetCategoriesMaxAggregateInputType = {
     id?: true
     name?: true
     budget?: true
+    budget_left?: true
   }
 
   export type BudgetCategoriesCountAggregateInputType = {
     id?: true
     name?: true
     budget?: true
+    budget_left?: true
     _all?: true
   }
 
@@ -1008,6 +1019,7 @@ export namespace Prisma {
     id: number
     name: string
     budget: number
+    budget_left: number
     _count: BudgetCategoriesCountAggregateOutputType | null
     _avg: BudgetCategoriesAvgAggregateOutputType | null
     _sum: BudgetCategoriesSumAggregateOutputType | null
@@ -1033,6 +1045,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     budget?: boolean
+    budget_left?: boolean
     expenses?: boolean | BudgetCategories$expensesArgs
     _count?: boolean | BudgetCategoriesCountOutputTypeArgs
   }
@@ -2734,7 +2747,8 @@ export namespace Prisma {
   export const BudgetCategoriesScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    budget: 'budget'
+    budget: 'budget',
+    budget_left: 'budget_left'
   };
 
   export type BudgetCategoriesScalarFieldEnum = (typeof BudgetCategoriesScalarFieldEnum)[keyof typeof BudgetCategoriesScalarFieldEnum]
@@ -2776,6 +2790,7 @@ export namespace Prisma {
     id?: IntFilter | number
     name?: StringFilter | string
     budget?: IntFilter | number
+    budget_left?: IntFilter | number
     expenses?: ExpensesListRelationFilter
   }
 
@@ -2783,6 +2798,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     budget?: SortOrder
+    budget_left?: SortOrder
     expenses?: ExpensesOrderByRelationAggregateInput
   }
 
@@ -2795,6 +2811,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     budget?: SortOrder
+    budget_left?: SortOrder
     _count?: BudgetCategoriesCountOrderByAggregateInput
     _avg?: BudgetCategoriesAvgOrderByAggregateInput
     _max?: BudgetCategoriesMaxOrderByAggregateInput
@@ -2809,6 +2826,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter | number
     name?: StringWithAggregatesFilter | string
     budget?: IntWithAggregatesFilter | number
+    budget_left?: IntWithAggregatesFilter | number
   }
 
   export type ExpensesWhereInput = {
@@ -2855,6 +2873,7 @@ export namespace Prisma {
   export type BudgetCategoriesCreateInput = {
     name: string
     budget: number
+    budget_left?: number
     expenses?: ExpensesCreateNestedManyWithoutCategoryInput
   }
 
@@ -2862,12 +2881,14 @@ export namespace Prisma {
     id?: number
     name: string
     budget: number
+    budget_left?: number
     expenses?: ExpensesUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type BudgetCategoriesUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     budget?: IntFieldUpdateOperationsInput | number
+    budget_left?: IntFieldUpdateOperationsInput | number
     expenses?: ExpensesUpdateManyWithoutCategoryNestedInput
   }
 
@@ -2875,18 +2896,21 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     budget?: IntFieldUpdateOperationsInput | number
+    budget_left?: IntFieldUpdateOperationsInput | number
     expenses?: ExpensesUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type BudgetCategoriesUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     budget?: IntFieldUpdateOperationsInput | number
+    budget_left?: IntFieldUpdateOperationsInput | number
   }
 
   export type BudgetCategoriesUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     budget?: IntFieldUpdateOperationsInput | number
+    budget_left?: IntFieldUpdateOperationsInput | number
   }
 
   export type ExpensesCreateInput = {
@@ -2960,28 +2984,33 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     budget?: SortOrder
+    budget_left?: SortOrder
   }
 
   export type BudgetCategoriesAvgOrderByAggregateInput = {
     id?: SortOrder
     budget?: SortOrder
+    budget_left?: SortOrder
   }
 
   export type BudgetCategoriesMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     budget?: SortOrder
+    budget_left?: SortOrder
   }
 
   export type BudgetCategoriesMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     budget?: SortOrder
+    budget_left?: SortOrder
   }
 
   export type BudgetCategoriesSumOrderByAggregateInput = {
     id?: SortOrder
     budget?: SortOrder
+    budget_left?: SortOrder
   }
 
   export type IntWithAggregatesFilter = {
@@ -3227,12 +3256,14 @@ export namespace Prisma {
   export type BudgetCategoriesCreateWithoutExpensesInput = {
     name: string
     budget: number
+    budget_left?: number
   }
 
   export type BudgetCategoriesUncheckedCreateWithoutExpensesInput = {
     id?: number
     name: string
     budget: number
+    budget_left?: number
   }
 
   export type BudgetCategoriesCreateOrConnectWithoutExpensesInput = {
@@ -3248,12 +3279,14 @@ export namespace Prisma {
   export type BudgetCategoriesUpdateWithoutExpensesInput = {
     name?: StringFieldUpdateOperationsInput | string
     budget?: IntFieldUpdateOperationsInput | number
+    budget_left?: IntFieldUpdateOperationsInput | number
   }
 
   export type BudgetCategoriesUncheckedUpdateWithoutExpensesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     budget?: IntFieldUpdateOperationsInput | number
+    budget_left?: IntFieldUpdateOperationsInput | number
   }
 
   export type ExpensesUpdateWithoutCategoryInput = {

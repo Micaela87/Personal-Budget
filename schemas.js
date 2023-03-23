@@ -25,7 +25,8 @@ export const responseCategorySchema = {
         properties: {
             id: { type: 'number' },
             name: { type: 'string' },
-            budget: { type: 'number' }
+            budget: { type: 'number' },
+            budget_left: { type: 'number' }
         }
       }
     }

@@ -7,6 +7,7 @@ model BudgetCategories {
   id Int @id @default(autoincrement())
   name String @unique
   budget Int
+  budget_left Int @default(1000)
   expenses Expenses[]
 
   @@map("categories")

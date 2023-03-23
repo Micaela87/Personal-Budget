@@ -92,7 +92,8 @@ function makeEnum(x) { return x; }
 exports.Prisma.BudgetCategoriesScalarFieldEnum = makeEnum({
   id: 'id',
   name: 'name',
-  budget: 'budget'
+  budget: 'budget',
+  budget_left: 'budget_left'
 });
 
 exports.Prisma.ExpensesScalarFieldEnum = makeEnum({

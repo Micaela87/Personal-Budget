@@ -84,6 +84,17 @@ export const postNewExpense = (fastify, options = {}, done) => {
             const validationResult = bodyValidationFunction(req.body);
         
             const expense = await prisma.expenses.create({data: req.body});
+
+            const category = await prisma.budgetCategories.findUnique({
+                where: { id: expense.categoryId },
+            });
+
+            category.budget_left = category.budget - expense.quantity;
+
+            const categoryUpdated = await prisma.budgetCategories.update({
+                where: { id: category.id },
+                data: category
+            });
         
             const responseSerializationFunction = res.getSerializationFunction(200);
             const serializedResponse = responseSerializationFunction({expense});
@@ -116,6 +127,17 @@ export const updateExpense = (fastify, options = {}, done) => {
             const expense = await prisma.expenses.update({
                 where: { id: Number(id) },
                 data: req.body
+            });
+
+            const category = await prisma.budgetCategories.findUnique({
+                where: { id: expense.categoryId },
+            });
+
+            category.budget_left = category.budget - expense.quantity;
+
+            const categoryUpdated = await prisma.budgetCategories.update({
+                where: { id: category.id },
+                data: category
             });
         
             const responseSerializationFunction = res.getSerializationFunction(200);
