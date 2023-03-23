@@ -1,4 +1,5 @@
 import Fastify from 'fastify';
+import cors from '@fastify/cors'
 import { PrismaClient } from './prisma/generated/prisma-client-js/index.js';
 import { getAllCategories, getCategoryByID, postNewCategory, updateCategory, deleteCategory } from './routes/categories.js';
 import { getAllExpenses, getExpenseById, getExpensesByCategoryID, postNewExpense, updateExpense, deleteExpense } from './routes/expenses.js';
@@ -6,6 +7,10 @@ export const prisma = new PrismaClient();
 
 const fastify = Fastify({
   logger: true
+});
+
+fastify.register(cors, { 
+  origin: true
 });
 
 // category routes

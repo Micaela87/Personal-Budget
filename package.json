@@ -8,6 +8,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@fastify/cors": "^8.2.1",
     "fastify": "^4.15.0",
     "fastify-prisma-client": "^5.0.0",
     "nodemon": "^2.0.21",
