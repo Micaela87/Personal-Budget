@@ -1,6 +1,5 @@
-import { PrismaClient } from '../prisma/generated/prisma-client-js/index.js';
-import { bodyPutSchema, bodyPostSchema, responseSchema } from '../schemas.js';
-const prisma = new PrismaClient();
+import { bodyCategoryPutSchema, bodyCategoryPostSchema, responseCategorySchema } from '../schemas.js';
+import { prisma } from '../index.js'
 
 export const getAllCategories = (fastify, options = {}, done) => {
     fastify.get('/categories', async (req, res) => {
@@ -73,7 +72,7 @@ export const postNewCategory = (fastify, options = {}, done) => {
     
         }
   
-    }, schema: { body: bodyPostSchema, response: { 200: responseSchema }}});
+    }, schema: { body: bodyCategoryPostSchema, response: { 200: responseCategorySchema }}});
 
     done();
 
@@ -108,7 +107,7 @@ export const updateCategory = (fastify, options = {}, done) => {
         
         }
     
-    }, schema: { body: bodyPutSchema, response: { 200: responseSchema }}});
+    }, schema: { body: bodyCategoryPutSchema, response: { 200: responseCategorySchema }}});
 
     done();
 
@@ -120,17 +119,17 @@ export const deleteCategory = (fastify, options = {}, done) => {
   
         try {
     
-        const category = await prisma.budgetCategories.delete({
-            where: { id: Number(req.params.id) }
-        });
-    
-        res.status(200).send({ ok: true });
+            const category = await prisma.budgetCategories.delete({
+                where: { id: Number(req.params.id) }
+            });
+        
+            res.status(200).send({ ok: true });
     
         } catch(error) {
     
-        fastify.log.error(error);
-        res.status(500).send({ ok: false, message: error.message });
-        process.exit(1);
+            fastify.log.error(error);
+            res.status(500).send({ ok: false, message: error.message });
+            process.exit(1);
     
         }
     });
