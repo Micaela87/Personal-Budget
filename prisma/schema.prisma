@@ -7,8 +7,16 @@ model BudgetCategories {
   id Int @id @default(autoincrement())
   name String @unique
   budget Int
+  expenses Expenses[]
 
   @@map("categories")
+}
+
+model Expenses {
+  id Int @id @default(autoincrement())
+  quantity Int
+  category BudgetCategories @relation(fields: [categoryId], references: id)
+  categoryId Int
 }
 
 generator client {

@@ -20,6 +20,16 @@ export type BudgetCategories = {
   budget: number
 }
 
+/**
+ * Model Expenses
+ * 
+ */
+export type Expenses = {
+  id: number
+  quantity: number
+  categoryId: number
+}
+
 
 /**
  * ##  Prisma Client ʲˢ
@@ -147,6 +157,16 @@ export class PrismaClient<
     * ```
     */
   get budgetCategories(): Prisma.BudgetCategoriesDelegate<GlobalReject>;
+
+  /**
+   * `prisma.expenses`: Exposes CRUD operations for the **Expenses** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Expenses
+    * const expenses = await prisma.expenses.findMany()
+    * ```
+    */
+  get expenses(): Prisma.ExpensesDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -616,7 +636,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    BudgetCategories: 'BudgetCategories'
+    BudgetCategories: 'BudgetCategories',
+    Expenses: 'Expenses'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -775,6 +796,48 @@ export namespace Prisma {
   /**
    * Count Types
    */
+
+
+  /**
+   * Count Type BudgetCategoriesCountOutputType
+   */
+
+
+  export type BudgetCategoriesCountOutputType = {
+    expenses: number
+  }
+
+  export type BudgetCategoriesCountOutputTypeSelect = {
+    expenses?: boolean
+  }
+
+  export type BudgetCategoriesCountOutputTypeGetPayload<S extends boolean | null | undefined | BudgetCategoriesCountOutputTypeArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? BudgetCategoriesCountOutputType :
+    S extends undefined ? never :
+    S extends { include: any } & (BudgetCategoriesCountOutputTypeArgs)
+    ? BudgetCategoriesCountOutputType 
+    : S extends { select: any } & (BudgetCategoriesCountOutputTypeArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+    P extends keyof BudgetCategoriesCountOutputType ? BudgetCategoriesCountOutputType[P] : never
+  } 
+      : BudgetCategoriesCountOutputType
+
+
+
+
+  // Custom InputTypes
+
+  /**
+   * BudgetCategoriesCountOutputType without action
+   */
+  export type BudgetCategoriesCountOutputTypeArgs = {
+    /**
+     * Select specific fields to fetch from the BudgetCategoriesCountOutputType
+     */
+    select?: BudgetCategoriesCountOutputTypeSelect | null
+  }
 
 
 
@@ -970,19 +1033,31 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     budget?: boolean
+    expenses?: boolean | BudgetCategories$expensesArgs
+    _count?: boolean | BudgetCategoriesCountOutputTypeArgs
   }
 
+
+  export type BudgetCategoriesInclude = {
+    expenses?: boolean | BudgetCategories$expensesArgs
+    _count?: boolean | BudgetCategoriesCountOutputTypeArgs
+  }
 
   export type BudgetCategoriesGetPayload<S extends boolean | null | undefined | BudgetCategoriesArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
     S extends true ? BudgetCategories :
     S extends undefined ? never :
     S extends { include: any } & (BudgetCategoriesArgs | BudgetCategoriesFindManyArgs)
-    ? BudgetCategories 
+    ? BudgetCategories  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'expenses' ? Array < ExpensesGetPayload<S['include'][P]>>  :
+        P extends '_count' ? BudgetCategoriesCountOutputTypeGetPayload<S['include'][P]> :  never
+  } 
     : S extends { select: any } & (BudgetCategoriesArgs | BudgetCategoriesFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-    P extends keyof BudgetCategories ? BudgetCategories[P] : never
+        P extends 'expenses' ? Array < ExpensesGetPayload<S['select'][P]>>  :
+        P extends '_count' ? BudgetCategoriesCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof BudgetCategories ? BudgetCategories[P] : never
   } 
       : BudgetCategories
 
@@ -1338,6 +1413,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
     constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
+    expenses<T extends BudgetCategories$expensesArgs= {}>(args?: Subset<T, BudgetCategories$expensesArgs>): Prisma.PrismaPromise<Array<ExpensesGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -1375,6 +1451,10 @@ export namespace Prisma {
      */
     select?: BudgetCategoriesSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: BudgetCategoriesInclude | null
+    /**
      * Filter, which BudgetCategories to fetch.
      */
     where: BudgetCategoriesWhereUniqueInput
@@ -1401,6 +1481,10 @@ export namespace Prisma {
      */
     select?: BudgetCategoriesSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: BudgetCategoriesInclude | null
+    /**
      * Filter, which BudgetCategories to fetch.
      */
     where: BudgetCategoriesWhereUniqueInput
@@ -1415,6 +1499,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the BudgetCategories
      */
     select?: BudgetCategoriesSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: BudgetCategoriesInclude | null
     /**
      * Filter, which BudgetCategories to fetch.
      */
@@ -1472,6 +1560,10 @@ export namespace Prisma {
      */
     select?: BudgetCategoriesSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: BudgetCategoriesInclude | null
+    /**
      * Filter, which BudgetCategories to fetch.
      */
     where?: BudgetCategoriesWhereInput
@@ -1517,6 +1609,10 @@ export namespace Prisma {
      */
     select?: BudgetCategoriesSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: BudgetCategoriesInclude | null
+    /**
      * Filter, which BudgetCategories to fetch.
      */
     where?: BudgetCategoriesWhereInput
@@ -1557,6 +1653,10 @@ export namespace Prisma {
      */
     select?: BudgetCategoriesSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: BudgetCategoriesInclude | null
+    /**
      * The data needed to create a BudgetCategories.
      */
     data: XOR<BudgetCategoriesCreateInput, BudgetCategoriesUncheckedCreateInput>
@@ -1571,6 +1671,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the BudgetCategories
      */
     select?: BudgetCategoriesSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: BudgetCategoriesInclude | null
     /**
      * The data needed to update a BudgetCategories.
      */
@@ -1606,6 +1710,10 @@ export namespace Prisma {
      */
     select?: BudgetCategoriesSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: BudgetCategoriesInclude | null
+    /**
      * The filter to search for the BudgetCategories to update in case it exists.
      */
     where: BudgetCategoriesWhereUniqueInput
@@ -1629,6 +1737,10 @@ export namespace Prisma {
      */
     select?: BudgetCategoriesSelect | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: BudgetCategoriesInclude | null
+    /**
      * Filter which BudgetCategories to delete.
      */
     where: BudgetCategoriesWhereUniqueInput
@@ -1647,6 +1759,27 @@ export namespace Prisma {
 
 
   /**
+   * BudgetCategories.expenses
+   */
+  export type BudgetCategories$expensesArgs = {
+    /**
+     * Select specific fields to fetch from the Expenses
+     */
+    select?: ExpensesSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ExpensesInclude | null
+    where?: ExpensesWhereInput
+    orderBy?: Enumerable<ExpensesOrderByWithRelationInput>
+    cursor?: ExpensesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<ExpensesScalarFieldEnum>
+  }
+
+
+  /**
    * BudgetCategories without action
    */
   export type BudgetCategoriesArgs = {
@@ -1654,6 +1787,939 @@ export namespace Prisma {
      * Select specific fields to fetch from the BudgetCategories
      */
     select?: BudgetCategoriesSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: BudgetCategoriesInclude | null
+  }
+
+
+
+  /**
+   * Model Expenses
+   */
+
+
+  export type AggregateExpenses = {
+    _count: ExpensesCountAggregateOutputType | null
+    _avg: ExpensesAvgAggregateOutputType | null
+    _sum: ExpensesSumAggregateOutputType | null
+    _min: ExpensesMinAggregateOutputType | null
+    _max: ExpensesMaxAggregateOutputType | null
+  }
+
+  export type ExpensesAvgAggregateOutputType = {
+    id: number | null
+    quantity: number | null
+    categoryId: number | null
+  }
+
+  export type ExpensesSumAggregateOutputType = {
+    id: number | null
+    quantity: number | null
+    categoryId: number | null
+  }
+
+  export type ExpensesMinAggregateOutputType = {
+    id: number | null
+    quantity: number | null
+    categoryId: number | null
+  }
+
+  export type ExpensesMaxAggregateOutputType = {
+    id: number | null
+    quantity: number | null
+    categoryId: number | null
+  }
+
+  export type ExpensesCountAggregateOutputType = {
+    id: number
+    quantity: number
+    categoryId: number
+    _all: number
+  }
+
+
+  export type ExpensesAvgAggregateInputType = {
+    id?: true
+    quantity?: true
+    categoryId?: true
+  }
+
+  export type ExpensesSumAggregateInputType = {
+    id?: true
+    quantity?: true
+    categoryId?: true
+  }
+
+  export type ExpensesMinAggregateInputType = {
+    id?: true
+    quantity?: true
+    categoryId?: true
+  }
+
+  export type ExpensesMaxAggregateInputType = {
+    id?: true
+    quantity?: true
+    categoryId?: true
+  }
+
+  export type ExpensesCountAggregateInputType = {
+    id?: true
+    quantity?: true
+    categoryId?: true
+    _all?: true
+  }
+
+  export type ExpensesAggregateArgs = {
+    /**
+     * Filter which Expenses to aggregate.
+     */
+    where?: ExpensesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Expenses to fetch.
+     */
+    orderBy?: Enumerable<ExpensesOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ExpensesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Expenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Expenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Expenses
+    **/
+    _count?: true | ExpensesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ExpensesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ExpensesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ExpensesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ExpensesMaxAggregateInputType
+  }
+
+  export type GetExpensesAggregateType<T extends ExpensesAggregateArgs> = {
+        [P in keyof T & keyof AggregateExpenses]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateExpenses[P]>
+      : GetScalarType<T[P], AggregateExpenses[P]>
+  }
+
+
+
+
+  export type ExpensesGroupByArgs = {
+    where?: ExpensesWhereInput
+    orderBy?: Enumerable<ExpensesOrderByWithAggregationInput>
+    by: ExpensesScalarFieldEnum[]
+    having?: ExpensesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ExpensesCountAggregateInputType | true
+    _avg?: ExpensesAvgAggregateInputType
+    _sum?: ExpensesSumAggregateInputType
+    _min?: ExpensesMinAggregateInputType
+    _max?: ExpensesMaxAggregateInputType
+  }
+
+
+  export type ExpensesGroupByOutputType = {
+    id: number
+    quantity: number
+    categoryId: number
+    _count: ExpensesCountAggregateOutputType | null
+    _avg: ExpensesAvgAggregateOutputType | null
+    _sum: ExpensesSumAggregateOutputType | null
+    _min: ExpensesMinAggregateOutputType | null
+    _max: ExpensesMaxAggregateOutputType | null
+  }
+
+  type GetExpensesGroupByPayload<T extends ExpensesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickArray<ExpensesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ExpensesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ExpensesGroupByOutputType[P]>
+            : GetScalarType<T[P], ExpensesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ExpensesSelect = {
+    id?: boolean
+    quantity?: boolean
+    categoryId?: boolean
+    category?: boolean | BudgetCategoriesArgs
+  }
+
+
+  export type ExpensesInclude = {
+    category?: boolean | BudgetCategoriesArgs
+  }
+
+  export type ExpensesGetPayload<S extends boolean | null | undefined | ExpensesArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? Expenses :
+    S extends undefined ? never :
+    S extends { include: any } & (ExpensesArgs | ExpensesFindManyArgs)
+    ? Expenses  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'category' ? BudgetCategoriesGetPayload<S['include'][P]> :  never
+  } 
+    : S extends { select: any } & (ExpensesArgs | ExpensesFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'category' ? BudgetCategoriesGetPayload<S['select'][P]> :  P extends keyof Expenses ? Expenses[P] : never
+  } 
+      : Expenses
+
+
+  type ExpensesCountArgs = 
+    Omit<ExpensesFindManyArgs, 'select' | 'include'> & {
+      select?: ExpensesCountAggregateInputType | true
+    }
+
+  export interface ExpensesDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Expenses that matches the filter.
+     * @param {ExpensesFindUniqueArgs} args - Arguments to find a Expenses
+     * @example
+     * // Get one Expenses
+     * const expenses = await prisma.expenses.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends ExpensesFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, ExpensesFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Expenses'> extends True ? Prisma__ExpensesClient<ExpensesGetPayload<T>> : Prisma__ExpensesClient<ExpensesGetPayload<T> | null, null>
+
+    /**
+     * Find one Expenses that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {ExpensesFindUniqueOrThrowArgs} args - Arguments to find a Expenses
+     * @example
+     * // Get one Expenses
+     * const expenses = await prisma.expenses.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends ExpensesFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, ExpensesFindUniqueOrThrowArgs>
+    ): Prisma__ExpensesClient<ExpensesGetPayload<T>>
+
+    /**
+     * Find the first Expenses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpensesFindFirstArgs} args - Arguments to find a Expenses
+     * @example
+     * // Get one Expenses
+     * const expenses = await prisma.expenses.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends ExpensesFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, ExpensesFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Expenses'> extends True ? Prisma__ExpensesClient<ExpensesGetPayload<T>> : Prisma__ExpensesClient<ExpensesGetPayload<T> | null, null>
+
+    /**
+     * Find the first Expenses that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpensesFindFirstOrThrowArgs} args - Arguments to find a Expenses
+     * @example
+     * // Get one Expenses
+     * const expenses = await prisma.expenses.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends ExpensesFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, ExpensesFindFirstOrThrowArgs>
+    ): Prisma__ExpensesClient<ExpensesGetPayload<T>>
+
+    /**
+     * Find zero or more Expenses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpensesFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Expenses
+     * const expenses = await prisma.expenses.findMany()
+     * 
+     * // Get first 10 Expenses
+     * const expenses = await prisma.expenses.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const expensesWithIdOnly = await prisma.expenses.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends ExpensesFindManyArgs>(
+      args?: SelectSubset<T, ExpensesFindManyArgs>
+    ): Prisma.PrismaPromise<Array<ExpensesGetPayload<T>>>
+
+    /**
+     * Create a Expenses.
+     * @param {ExpensesCreateArgs} args - Arguments to create a Expenses.
+     * @example
+     * // Create one Expenses
+     * const Expenses = await prisma.expenses.create({
+     *   data: {
+     *     // ... data to create a Expenses
+     *   }
+     * })
+     * 
+    **/
+    create<T extends ExpensesCreateArgs>(
+      args: SelectSubset<T, ExpensesCreateArgs>
+    ): Prisma__ExpensesClient<ExpensesGetPayload<T>>
+
+    /**
+     * Delete a Expenses.
+     * @param {ExpensesDeleteArgs} args - Arguments to delete one Expenses.
+     * @example
+     * // Delete one Expenses
+     * const Expenses = await prisma.expenses.delete({
+     *   where: {
+     *     // ... filter to delete one Expenses
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends ExpensesDeleteArgs>(
+      args: SelectSubset<T, ExpensesDeleteArgs>
+    ): Prisma__ExpensesClient<ExpensesGetPayload<T>>
+
+    /**
+     * Update one Expenses.
+     * @param {ExpensesUpdateArgs} args - Arguments to update one Expenses.
+     * @example
+     * // Update one Expenses
+     * const expenses = await prisma.expenses.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends ExpensesUpdateArgs>(
+      args: SelectSubset<T, ExpensesUpdateArgs>
+    ): Prisma__ExpensesClient<ExpensesGetPayload<T>>
+
+    /**
+     * Delete zero or more Expenses.
+     * @param {ExpensesDeleteManyArgs} args - Arguments to filter Expenses to delete.
+     * @example
+     * // Delete a few Expenses
+     * const { count } = await prisma.expenses.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends ExpensesDeleteManyArgs>(
+      args?: SelectSubset<T, ExpensesDeleteManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Expenses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpensesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Expenses
+     * const expenses = await prisma.expenses.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends ExpensesUpdateManyArgs>(
+      args: SelectSubset<T, ExpensesUpdateManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Expenses.
+     * @param {ExpensesUpsertArgs} args - Arguments to update or create a Expenses.
+     * @example
+     * // Update or create a Expenses
+     * const expenses = await prisma.expenses.upsert({
+     *   create: {
+     *     // ... data to create a Expenses
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Expenses we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends ExpensesUpsertArgs>(
+      args: SelectSubset<T, ExpensesUpsertArgs>
+    ): Prisma__ExpensesClient<ExpensesGetPayload<T>>
+
+    /**
+     * Count the number of Expenses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpensesCountArgs} args - Arguments to filter Expenses to count.
+     * @example
+     * // Count the number of Expenses
+     * const count = await prisma.expenses.count({
+     *   where: {
+     *     // ... the filter for the Expenses we want to count
+     *   }
+     * })
+    **/
+    count<T extends ExpensesCountArgs>(
+      args?: Subset<T, ExpensesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ExpensesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Expenses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpensesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ExpensesAggregateArgs>(args: Subset<T, ExpensesAggregateArgs>): Prisma.PrismaPromise<GetExpensesAggregateType<T>>
+
+    /**
+     * Group by Expenses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpensesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ExpensesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ExpensesGroupByArgs['orderBy'] }
+        : { orderBy?: ExpensesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ExpensesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExpensesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Expenses.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__ExpensesClient<T, Null = never> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+
+    category<T extends BudgetCategoriesArgs= {}>(args?: Subset<T, BudgetCategoriesArgs>): Prisma__BudgetCategoriesClient<BudgetCategoriesGetPayload<T> | Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * Expenses base type for findUnique actions
+   */
+  export type ExpensesFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the Expenses
+     */
+    select?: ExpensesSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ExpensesInclude | null
+    /**
+     * Filter, which Expenses to fetch.
+     */
+    where: ExpensesWhereUniqueInput
+  }
+
+  /**
+   * Expenses findUnique
+   */
+  export interface ExpensesFindUniqueArgs extends ExpensesFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * Expenses findUniqueOrThrow
+   */
+  export type ExpensesFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the Expenses
+     */
+    select?: ExpensesSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ExpensesInclude | null
+    /**
+     * Filter, which Expenses to fetch.
+     */
+    where: ExpensesWhereUniqueInput
+  }
+
+
+  /**
+   * Expenses base type for findFirst actions
+   */
+  export type ExpensesFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the Expenses
+     */
+    select?: ExpensesSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ExpensesInclude | null
+    /**
+     * Filter, which Expenses to fetch.
+     */
+    where?: ExpensesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Expenses to fetch.
+     */
+    orderBy?: Enumerable<ExpensesOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Expenses.
+     */
+    cursor?: ExpensesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Expenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Expenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Expenses.
+     */
+    distinct?: Enumerable<ExpensesScalarFieldEnum>
+  }
+
+  /**
+   * Expenses findFirst
+   */
+  export interface ExpensesFindFirstArgs extends ExpensesFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * Expenses findFirstOrThrow
+   */
+  export type ExpensesFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the Expenses
+     */
+    select?: ExpensesSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ExpensesInclude | null
+    /**
+     * Filter, which Expenses to fetch.
+     */
+    where?: ExpensesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Expenses to fetch.
+     */
+    orderBy?: Enumerable<ExpensesOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Expenses.
+     */
+    cursor?: ExpensesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Expenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Expenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Expenses.
+     */
+    distinct?: Enumerable<ExpensesScalarFieldEnum>
+  }
+
+
+  /**
+   * Expenses findMany
+   */
+  export type ExpensesFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the Expenses
+     */
+    select?: ExpensesSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ExpensesInclude | null
+    /**
+     * Filter, which Expenses to fetch.
+     */
+    where?: ExpensesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Expenses to fetch.
+     */
+    orderBy?: Enumerable<ExpensesOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Expenses.
+     */
+    cursor?: ExpensesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Expenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Expenses.
+     */
+    skip?: number
+    distinct?: Enumerable<ExpensesScalarFieldEnum>
+  }
+
+
+  /**
+   * Expenses create
+   */
+  export type ExpensesCreateArgs = {
+    /**
+     * Select specific fields to fetch from the Expenses
+     */
+    select?: ExpensesSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ExpensesInclude | null
+    /**
+     * The data needed to create a Expenses.
+     */
+    data: XOR<ExpensesCreateInput, ExpensesUncheckedCreateInput>
+  }
+
+
+  /**
+   * Expenses update
+   */
+  export type ExpensesUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the Expenses
+     */
+    select?: ExpensesSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ExpensesInclude | null
+    /**
+     * The data needed to update a Expenses.
+     */
+    data: XOR<ExpensesUpdateInput, ExpensesUncheckedUpdateInput>
+    /**
+     * Choose, which Expenses to update.
+     */
+    where: ExpensesWhereUniqueInput
+  }
+
+
+  /**
+   * Expenses updateMany
+   */
+  export type ExpensesUpdateManyArgs = {
+    /**
+     * The data used to update Expenses.
+     */
+    data: XOR<ExpensesUpdateManyMutationInput, ExpensesUncheckedUpdateManyInput>
+    /**
+     * Filter which Expenses to update
+     */
+    where?: ExpensesWhereInput
+  }
+
+
+  /**
+   * Expenses upsert
+   */
+  export type ExpensesUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the Expenses
+     */
+    select?: ExpensesSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ExpensesInclude | null
+    /**
+     * The filter to search for the Expenses to update in case it exists.
+     */
+    where: ExpensesWhereUniqueInput
+    /**
+     * In case the Expenses found by the `where` argument doesn't exist, create a new Expenses with this data.
+     */
+    create: XOR<ExpensesCreateInput, ExpensesUncheckedCreateInput>
+    /**
+     * In case the Expenses was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ExpensesUpdateInput, ExpensesUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Expenses delete
+   */
+  export type ExpensesDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the Expenses
+     */
+    select?: ExpensesSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ExpensesInclude | null
+    /**
+     * Filter which Expenses to delete.
+     */
+    where: ExpensesWhereUniqueInput
+  }
+
+
+  /**
+   * Expenses deleteMany
+   */
+  export type ExpensesDeleteManyArgs = {
+    /**
+     * Filter which Expenses to delete
+     */
+    where?: ExpensesWhereInput
+  }
+
+
+  /**
+   * Expenses without action
+   */
+  export type ExpensesArgs = {
+    /**
+     * Select specific fields to fetch from the Expenses
+     */
+    select?: ExpensesSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ExpensesInclude | null
   }
 
 
@@ -1672,6 +2738,15 @@ export namespace Prisma {
   };
 
   export type BudgetCategoriesScalarFieldEnum = (typeof BudgetCategoriesScalarFieldEnum)[keyof typeof BudgetCategoriesScalarFieldEnum]
+
+
+  export const ExpensesScalarFieldEnum: {
+    id: 'id',
+    quantity: 'quantity',
+    categoryId: 'categoryId'
+  };
+
+  export type ExpensesScalarFieldEnum = (typeof ExpensesScalarFieldEnum)[keyof typeof ExpensesScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -1701,12 +2776,14 @@ export namespace Prisma {
     id?: IntFilter | number
     name?: StringFilter | string
     budget?: IntFilter | number
+    expenses?: ExpensesListRelationFilter
   }
 
   export type BudgetCategoriesOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     budget?: SortOrder
+    expenses?: ExpensesOrderByRelationAggregateInput
   }
 
   export type BudgetCategoriesWhereUniqueInput = {
@@ -1734,26 +2811,71 @@ export namespace Prisma {
     budget?: IntWithAggregatesFilter | number
   }
 
+  export type ExpensesWhereInput = {
+    AND?: Enumerable<ExpensesWhereInput>
+    OR?: Enumerable<ExpensesWhereInput>
+    NOT?: Enumerable<ExpensesWhereInput>
+    id?: IntFilter | number
+    quantity?: IntFilter | number
+    categoryId?: IntFilter | number
+    category?: XOR<BudgetCategoriesRelationFilter, BudgetCategoriesWhereInput>
+  }
+
+  export type ExpensesOrderByWithRelationInput = {
+    id?: SortOrder
+    quantity?: SortOrder
+    categoryId?: SortOrder
+    category?: BudgetCategoriesOrderByWithRelationInput
+  }
+
+  export type ExpensesWhereUniqueInput = {
+    id?: number
+  }
+
+  export type ExpensesOrderByWithAggregationInput = {
+    id?: SortOrder
+    quantity?: SortOrder
+    categoryId?: SortOrder
+    _count?: ExpensesCountOrderByAggregateInput
+    _avg?: ExpensesAvgOrderByAggregateInput
+    _max?: ExpensesMaxOrderByAggregateInput
+    _min?: ExpensesMinOrderByAggregateInput
+    _sum?: ExpensesSumOrderByAggregateInput
+  }
+
+  export type ExpensesScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<ExpensesScalarWhereWithAggregatesInput>
+    OR?: Enumerable<ExpensesScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<ExpensesScalarWhereWithAggregatesInput>
+    id?: IntWithAggregatesFilter | number
+    quantity?: IntWithAggregatesFilter | number
+    categoryId?: IntWithAggregatesFilter | number
+  }
+
   export type BudgetCategoriesCreateInput = {
     name: string
     budget: number
+    expenses?: ExpensesCreateNestedManyWithoutCategoryInput
   }
 
   export type BudgetCategoriesUncheckedCreateInput = {
     id?: number
     name: string
     budget: number
+    expenses?: ExpensesUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type BudgetCategoriesUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     budget?: IntFieldUpdateOperationsInput | number
+    expenses?: ExpensesUpdateManyWithoutCategoryNestedInput
   }
 
   export type BudgetCategoriesUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     budget?: IntFieldUpdateOperationsInput | number
+    expenses?: ExpensesUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type BudgetCategoriesUpdateManyMutationInput = {
@@ -1765,6 +2887,38 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     budget?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ExpensesCreateInput = {
+    quantity: number
+    category: BudgetCategoriesCreateNestedOneWithoutExpensesInput
+  }
+
+  export type ExpensesUncheckedCreateInput = {
+    id?: number
+    quantity: number
+    categoryId: number
+  }
+
+  export type ExpensesUpdateInput = {
+    quantity?: IntFieldUpdateOperationsInput | number
+    category?: BudgetCategoriesUpdateOneRequiredWithoutExpensesNestedInput
+  }
+
+  export type ExpensesUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    categoryId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ExpensesUpdateManyMutationInput = {
+    quantity?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ExpensesUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+    categoryId?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter = {
@@ -1790,6 +2944,16 @@ export namespace Prisma {
     startsWith?: string
     endsWith?: string
     not?: NestedStringFilter | string
+  }
+
+  export type ExpensesListRelationFilter = {
+    every?: ExpensesWhereInput
+    some?: ExpensesWhereInput
+    none?: ExpensesWhereInput
+  }
+
+  export type ExpensesOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type BudgetCategoriesCountOrderByAggregateInput = {
@@ -1853,6 +3017,53 @@ export namespace Prisma {
     _max?: NestedStringFilter
   }
 
+  export type BudgetCategoriesRelationFilter = {
+    is?: BudgetCategoriesWhereInput
+    isNot?: BudgetCategoriesWhereInput
+  }
+
+  export type ExpensesCountOrderByAggregateInput = {
+    id?: SortOrder
+    quantity?: SortOrder
+    categoryId?: SortOrder
+  }
+
+  export type ExpensesAvgOrderByAggregateInput = {
+    id?: SortOrder
+    quantity?: SortOrder
+    categoryId?: SortOrder
+  }
+
+  export type ExpensesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    quantity?: SortOrder
+    categoryId?: SortOrder
+  }
+
+  export type ExpensesMinOrderByAggregateInput = {
+    id?: SortOrder
+    quantity?: SortOrder
+    categoryId?: SortOrder
+  }
+
+  export type ExpensesSumOrderByAggregateInput = {
+    id?: SortOrder
+    quantity?: SortOrder
+    categoryId?: SortOrder
+  }
+
+  export type ExpensesCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<Enumerable<ExpensesCreateWithoutCategoryInput>, Enumerable<ExpensesUncheckedCreateWithoutCategoryInput>>
+    connectOrCreate?: Enumerable<ExpensesCreateOrConnectWithoutCategoryInput>
+    connect?: Enumerable<ExpensesWhereUniqueInput>
+  }
+
+  export type ExpensesUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<Enumerable<ExpensesCreateWithoutCategoryInput>, Enumerable<ExpensesUncheckedCreateWithoutCategoryInput>>
+    connectOrCreate?: Enumerable<ExpensesCreateOrConnectWithoutCategoryInput>
+    connect?: Enumerable<ExpensesWhereUniqueInput>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -1863,6 +3074,46 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type ExpensesUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<Enumerable<ExpensesCreateWithoutCategoryInput>, Enumerable<ExpensesUncheckedCreateWithoutCategoryInput>>
+    connectOrCreate?: Enumerable<ExpensesCreateOrConnectWithoutCategoryInput>
+    upsert?: Enumerable<ExpensesUpsertWithWhereUniqueWithoutCategoryInput>
+    set?: Enumerable<ExpensesWhereUniqueInput>
+    disconnect?: Enumerable<ExpensesWhereUniqueInput>
+    delete?: Enumerable<ExpensesWhereUniqueInput>
+    connect?: Enumerable<ExpensesWhereUniqueInput>
+    update?: Enumerable<ExpensesUpdateWithWhereUniqueWithoutCategoryInput>
+    updateMany?: Enumerable<ExpensesUpdateManyWithWhereWithoutCategoryInput>
+    deleteMany?: Enumerable<ExpensesScalarWhereInput>
+  }
+
+  export type ExpensesUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<Enumerable<ExpensesCreateWithoutCategoryInput>, Enumerable<ExpensesUncheckedCreateWithoutCategoryInput>>
+    connectOrCreate?: Enumerable<ExpensesCreateOrConnectWithoutCategoryInput>
+    upsert?: Enumerable<ExpensesUpsertWithWhereUniqueWithoutCategoryInput>
+    set?: Enumerable<ExpensesWhereUniqueInput>
+    disconnect?: Enumerable<ExpensesWhereUniqueInput>
+    delete?: Enumerable<ExpensesWhereUniqueInput>
+    connect?: Enumerable<ExpensesWhereUniqueInput>
+    update?: Enumerable<ExpensesUpdateWithWhereUniqueWithoutCategoryInput>
+    updateMany?: Enumerable<ExpensesUpdateManyWithWhereWithoutCategoryInput>
+    deleteMany?: Enumerable<ExpensesScalarWhereInput>
+  }
+
+  export type BudgetCategoriesCreateNestedOneWithoutExpensesInput = {
+    create?: XOR<BudgetCategoriesCreateWithoutExpensesInput, BudgetCategoriesUncheckedCreateWithoutExpensesInput>
+    connectOrCreate?: BudgetCategoriesCreateOrConnectWithoutExpensesInput
+    connect?: BudgetCategoriesWhereUniqueInput
+  }
+
+  export type BudgetCategoriesUpdateOneRequiredWithoutExpensesNestedInput = {
+    create?: XOR<BudgetCategoriesCreateWithoutExpensesInput, BudgetCategoriesUncheckedCreateWithoutExpensesInput>
+    connectOrCreate?: BudgetCategoriesCreateOrConnectWithoutExpensesInput
+    upsert?: BudgetCategoriesUpsertWithoutExpensesInput
+    connect?: BudgetCategoriesWhereUniqueInput
+    update?: XOR<BudgetCategoriesUpdateWithoutExpensesInput, BudgetCategoriesUncheckedUpdateWithoutExpensesInput>
   }
 
   export type NestedIntFilter = {
@@ -1932,6 +3183,91 @@ export namespace Prisma {
     _count?: NestedIntFilter
     _min?: NestedStringFilter
     _max?: NestedStringFilter
+  }
+
+  export type ExpensesCreateWithoutCategoryInput = {
+    quantity: number
+  }
+
+  export type ExpensesUncheckedCreateWithoutCategoryInput = {
+    id?: number
+    quantity: number
+  }
+
+  export type ExpensesCreateOrConnectWithoutCategoryInput = {
+    where: ExpensesWhereUniqueInput
+    create: XOR<ExpensesCreateWithoutCategoryInput, ExpensesUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type ExpensesUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: ExpensesWhereUniqueInput
+    update: XOR<ExpensesUpdateWithoutCategoryInput, ExpensesUncheckedUpdateWithoutCategoryInput>
+    create: XOR<ExpensesCreateWithoutCategoryInput, ExpensesUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type ExpensesUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: ExpensesWhereUniqueInput
+    data: XOR<ExpensesUpdateWithoutCategoryInput, ExpensesUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type ExpensesUpdateManyWithWhereWithoutCategoryInput = {
+    where: ExpensesScalarWhereInput
+    data: XOR<ExpensesUpdateManyMutationInput, ExpensesUncheckedUpdateManyWithoutExpensesInput>
+  }
+
+  export type ExpensesScalarWhereInput = {
+    AND?: Enumerable<ExpensesScalarWhereInput>
+    OR?: Enumerable<ExpensesScalarWhereInput>
+    NOT?: Enumerable<ExpensesScalarWhereInput>
+    id?: IntFilter | number
+    quantity?: IntFilter | number
+    categoryId?: IntFilter | number
+  }
+
+  export type BudgetCategoriesCreateWithoutExpensesInput = {
+    name: string
+    budget: number
+  }
+
+  export type BudgetCategoriesUncheckedCreateWithoutExpensesInput = {
+    id?: number
+    name: string
+    budget: number
+  }
+
+  export type BudgetCategoriesCreateOrConnectWithoutExpensesInput = {
+    where: BudgetCategoriesWhereUniqueInput
+    create: XOR<BudgetCategoriesCreateWithoutExpensesInput, BudgetCategoriesUncheckedCreateWithoutExpensesInput>
+  }
+
+  export type BudgetCategoriesUpsertWithoutExpensesInput = {
+    update: XOR<BudgetCategoriesUpdateWithoutExpensesInput, BudgetCategoriesUncheckedUpdateWithoutExpensesInput>
+    create: XOR<BudgetCategoriesCreateWithoutExpensesInput, BudgetCategoriesUncheckedCreateWithoutExpensesInput>
+  }
+
+  export type BudgetCategoriesUpdateWithoutExpensesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    budget?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type BudgetCategoriesUncheckedUpdateWithoutExpensesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    budget?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ExpensesUpdateWithoutCategoryInput = {
+    quantity?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ExpensesUncheckedUpdateWithoutCategoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ExpensesUncheckedUpdateManyWithoutExpensesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quantity?: IntFieldUpdateOperationsInput | number
   }
 
 

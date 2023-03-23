@@ -99,6 +99,12 @@ exports.Prisma.BudgetCategoriesScalarFieldEnum = makeEnum({
   budget: 'budget'
 });
 
+exports.Prisma.ExpensesScalarFieldEnum = makeEnum({
+  id: 'id',
+  quantity: 'quantity',
+  categoryId: 'categoryId'
+});
+
 exports.Prisma.SortOrder = makeEnum({
   asc: 'asc',
   desc: 'desc'
@@ -110,10 +116,11 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 
 exports.Prisma.ModelName = makeEnum({
-  BudgetCategories: 'BudgetCategories'
+  BudgetCategories: 'BudgetCategories',
+  Expenses: 'Expenses'
 });
 
-const dmmfString = "{\"datamodel\":{\"enums\":[],\"models\":[{\"name\":\"BudgetCategories\",\"dbName\":\"categories\",\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Int\",\"default\":{\"name\":\"autoincrement\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"name\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":true,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"budget\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Int\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false}],\"types\":[]},\"mappings\":{\"modelOperations\":[{\"model\":\"BudgetCategories\",\"plural\":\"budgetCategories\",\"findUnique\":\"findUniqueBudgetCategories\",\"findUniqueOrThrow\":\"findUniqueBudgetCategoriesOrThrow\",\"findFirst\":\"findFirstBudgetCategories\",\"findFirstOrThrow\":\"findFirstBudgetCategoriesOrThrow\",\"findMany\":\"findManyBudgetCategories\",\"create\":\"createOneBudgetCategories\",\"delete\":\"deleteOneBudgetCategories\",\"update\":\"updateOneBudgetCategories\",\"deleteMany\":\"deleteManyBudgetCategories\",\"updateMany\":\"updateManyBudgetCategories\",\"upsert\":\"upsertOneBudgetCategories\",\"aggregate\":\"aggregateBudgetCategories\",\"groupBy\":\"groupByBudgetCategories\"}],\"otherOperations\":{\"read\":[],\"write\":[\"executeRaw\",\"queryRaw\"]}}}"
+const dmmfString = "{\"datamodel\":{\"enums\":[],\"models\":[{\"name\":\"BudgetCategories\",\"dbName\":\"categories\",\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Int\",\"default\":{\"name\":\"autoincrement\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"name\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":true,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"budget\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Int\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"expenses\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Expenses\",\"relationName\":\"BudgetCategoriesToExpenses\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},{\"name\":\"Expenses\",\"dbName\":null,\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Int\",\"default\":{\"name\":\"autoincrement\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"quantity\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Int\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"category\",\"kind\":\"object\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"BudgetCategories\",\"relationName\":\"BudgetCategoriesToExpenses\",\"relationFromFields\":[\"categoryId\"],\"relationToFields\":[\"id\"],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"categoryId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"Int\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false}],\"types\":[]},\"mappings\":{\"modelOperations\":[{\"model\":\"BudgetCategories\",\"plural\":\"budgetCategories\",\"findUnique\":\"findUniqueBudgetCategories\",\"findUniqueOrThrow\":\"findUniqueBudgetCategoriesOrThrow\",\"findFirst\":\"findFirstBudgetCategories\",\"findFirstOrThrow\":\"findFirstBudgetCategoriesOrThrow\",\"findMany\":\"findManyBudgetCategories\",\"create\":\"createOneBudgetCategories\",\"delete\":\"deleteOneBudgetCategories\",\"update\":\"updateOneBudgetCategories\",\"deleteMany\":\"deleteManyBudgetCategories\",\"updateMany\":\"updateManyBudgetCategories\",\"upsert\":\"upsertOneBudgetCategories\",\"aggregate\":\"aggregateBudgetCategories\",\"groupBy\":\"groupByBudgetCategories\"},{\"model\":\"Expenses\",\"plural\":\"expenses\",\"findUnique\":\"findUniqueExpenses\",\"findUniqueOrThrow\":\"findUniqueExpensesOrThrow\",\"findFirst\":\"findFirstExpenses\",\"findFirstOrThrow\":\"findFirstExpensesOrThrow\",\"findMany\":\"findManyExpenses\",\"create\":\"createOneExpenses\",\"delete\":\"deleteOneExpenses\",\"update\":\"updateOneExpenses\",\"deleteMany\":\"deleteManyExpenses\",\"updateMany\":\"updateManyExpenses\",\"upsert\":\"upsertOneExpenses\",\"aggregate\":\"aggregateExpenses\",\"groupBy\":\"groupByExpenses\"}],\"otherOperations\":{\"read\":[],\"write\":[\"executeRaw\",\"queryRaw\"]}}}"
 const dmmf = JSON.parse(dmmfString)
 exports.Prisma.dmmf = JSON.parse(dmmfString)
 
@@ -139,8 +146,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "..\\..\\..\\.env",
-    "schemaEnvPath": "..\\..\\..\\.env"
+    "rootEnvPath": null
   },
   "relativePath": "..\\..",
   "clientVersion": "4.11.0",

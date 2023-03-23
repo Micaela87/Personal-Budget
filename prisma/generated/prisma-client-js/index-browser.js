@@ -95,6 +95,12 @@ exports.Prisma.BudgetCategoriesScalarFieldEnum = makeEnum({
   budget: 'budget'
 });
 
+exports.Prisma.ExpensesScalarFieldEnum = makeEnum({
+  id: 'id',
+  quantity: 'quantity',
+  categoryId: 'categoryId'
+});
+
 exports.Prisma.SortOrder = makeEnum({
   asc: 'asc',
   desc: 'desc'
@@ -106,7 +112,8 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 
 exports.Prisma.ModelName = makeEnum({
-  BudgetCategories: 'BudgetCategories'
+  BudgetCategories: 'BudgetCategories',
+  Expenses: 'Expenses'
 });
 
 /**
